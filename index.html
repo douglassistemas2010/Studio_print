@@ -2546,15 +2546,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 const calcularComApresentacao=calcularCustos;
 calcularCustos=function(){calcularComApresentacao();if(Number.isFinite(ultimosResultados.custo_total)){animarNumerosResultados();pulsarGrafico();}};
 </script><dialog id="orcamentoWhatsApp" aria-labelledby="orcamentoTitulo" data-aba="dados">
-<div class="orcamento-cabecalho"><h2 id="orcamentoTitulo">Compartilhar orçamento</h2><button type="button" class="btn-secondary" aria-label="Fechar or?amento" onclick="document.getElementById('orcamentoWhatsApp').close()">✕</button></div>
-<nav class="orcamento-abas" aria-label="Etapas do or?amento"><button type="button" onclick="selecionarAbaOrcamento('dados')" aria-pressed="true" data-aba="dados">Peça</button><button type="button" onclick="selecionarAbaOrcamento('condicoes')" aria-pressed="false" data-aba="condicoes">Detalhes</button><button type="button" onclick="selecionarAbaOrcamento('previa')" aria-pressed="false" data-aba="previa">Prévia</button></nav>
-<div class="orcamento-corpo"><form id="orcamentoCampos" onsubmit="event.preventDefault()" oninput="atualizarPreviaOrcamento()"><section class="orcamento-dados"><div class="orcamento-campo"><label for="orcamentoCliente">Cliente (opcional)</label><input id="orcamentoCliente" maxlength="120" placeholder="Nome do cliente"></div>
+<div class="orcamento-cabecalho"><h2 id="orcamentoTitulo">Compartilhar orçamento</h2><button type="button" class="btn-secondary" aria-label="Fechar orçamento" onclick="document.getElementById('orcamentoWhatsApp').close()">✕</button></div>
+<nav class="orcamento-abas" aria-label="Etapas do orçamento"><button type="button" onclick="selecionarAbaOrcamento('dados')" aria-pressed="true" data-aba="dados">Peça</button><button type="button" onclick="selecionarAbaOrcamento('condicoes')" aria-pressed="false" data-aba="condicoes">Detalhes</button><button type="button" onclick="selecionarAbaOrcamento('previa')" aria-pressed="false" data-aba="previa">Prévia</button></nav>
+<div class="orcamento-corpo"><form id="orcamentoCampos" onsubmit="event.preventDefault()" oninput="atualizarPreviaOrcamento()"><section class="orcamento-dados"><div class="orcamento-campo"><label for="orcamentoDataEmissao">Data do orçamento</label><input id="orcamentoDataEmissao" type="text" inputmode="numeric" maxlength="10" placeholder="DD/MM/AAAA" required oninput="mascararDataOrcamento(this)" aria-label="Data do orçamento, dia mês e ano"></div><div class="orcamento-campo"><label for="orcamentoCliente">Cliente (opcional)</label><input id="orcamentoCliente" maxlength="120" placeholder="Nome do cliente"></div>
 <div class="orcamento-campo"><label for="orcamentoPeca">Nome da peça</label><input id="orcamentoPeca" required maxlength="180" placeholder="Ex.: Suporte para celular"></div>
-<div class="orcamento-campo"><label for="orcamentoQuantidade">Quantidade</label><input id="orcamentoQuantidade" type="number" min="1" max="10000" step="1" required value="1"></div></section><section class="orcamento-condicoes"><div class="orcamento-campo"><label for="orcamentoMaterial">Material (opcional)</label><input id="orcamentoMaterial" maxlength="100" placeholder="Ex.: PLA"></div>
+<div class="orcamento-campo"><label for="orcamentoQuantidade">Quantidade (unidades)</label><input id="orcamentoQuantidade" type="number" min="1" max="10000" step="1" required value="1"></div><div class="orcamento-campo"><label for="orcamentoValorUnitario">Valor unitário (R$)</label><input id="orcamentoValorUnitario" readonly aria-readonly="true" title="Valor calculado para uma unidade"></div><div class="orcamento-campo"><label for="orcamentoValorTotal">Valor total (R$)</label><input id="orcamentoValorTotal" readonly aria-readonly="true" title="Valor unitário multiplicado pela quantidade"></div></section><section class="orcamento-condicoes"><div class="orcamento-campo"><label for="orcamentoMaterial">Material (opcional)</label><input id="orcamentoMaterial" maxlength="100" placeholder="Ex.: PLA"></div>
 <div class="orcamento-campo"><label for="orcamentoCor">Cor / acabamento (opcional)</label><input id="orcamentoCor" maxlength="120" placeholder="Cor e acabamento da peça"></div>
-<div class="orcamento-campo"><label for="orcamentoPrazo">Prazo (opcional)</label><input id="orcamentoPrazo" maxlength="150" placeholder="Prazo combinado com o cliente"></div>
+<div class="orcamento-campo"><label for="orcamentoPrazo">Previsão de entrega (opcional)</label><input id="orcamentoPrazo" type="text" inputmode="numeric" maxlength="10" placeholder="DD/MM/AAAA" oninput="mascararDataOrcamento(this)"></div>
 <div class="orcamento-campo"><label for="orcamentoPagamento">Pagamento (opcional)</label><input id="orcamentoPagamento" maxlength="150" placeholder="Condições de pagamento"></div>
-<div class="orcamento-campo"><label for="orcamentoValidade">Validade do orçamento (opcional)</label><input id="orcamentoValidade" maxlength="100" placeholder="Ex.: válido por 7 dias"></div>
+<div class="orcamento-campo"><label for="orcamentoValidade">Válido até (opcional)</label><input id="orcamentoValidade" type="text" inputmode="numeric" maxlength="10" placeholder="DD/MM/AAAA" oninput="mascararDataOrcamento(this)"></div>
 <div class="orcamento-campo"><label for="orcamentoObservacao">Observações (opcional)</label><textarea id="orcamentoObservacao" maxlength="1000" rows="2" placeholder="Cor, prazo combinado ou condições de pagamento"></textarea></div></section></form><section class="orcamento-mensagem"><h3>Mensagem para o cliente</h3><pre id="orcamentoPrevia" aria-live="polite"></pre></section></div>
 <footer class="orcamento-rodape"><div class="orcamento-acoes"><button class="btn-success" type="button" onclick="baixarImagemOrcamento(event)">Baixar com logo</button><a id="abrirWhatsAppMaquina" class="btn-primary" onclick="return validarCompartilhamentoOrcamento(event)">Abrir WhatsApp</a><a id="abrirWhatsAppWeb" class="btn-secondary" target="_blank" rel="noopener noreferrer" onclick="return validarCompartilhamentoOrcamento(event)">WhatsApp Web</a></div><p class="calculo-nota">Revise e envie no WhatsApp. Para incluir a logo, baixe a imagem e anexe na conversa.</p></footer>
 </dialog>
@@ -2562,12 +2562,19 @@ calcularCustos=function(){calcularComApresentacao();if(Number.isFinite(ultimosRe
 <style>#orcamentoWhatsApp{width:min(620px,calc(100% - 24px));max-height:calc(100dvh - 32px);overflow:auto;margin:auto;padding:26px;border:1px solid var(--line);border-radius:24px;background:var(--input-bg,#17233b);color:var(--text);box-shadow:0 24px 90px #0005}#orcamentoWhatsApp::backdrop{background:#07112699;backdrop-filter:blur(6px)}.orcamento-cabecalho{display:flex;justify-content:space-between;align-items:center;gap:16px}.orcamento-cabecalho h2{margin:0;font-size:23px}.orcamento-cabecalho button{flex:none}#orcamentoCampos label{display:block;margin:18px 0 7px}#orcamentoCampos textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--input-bg);color:var(--text);font:inherit;resize:vertical}#orcamentoWhatsApp h3{font-size:15px;margin-top:22px}#orcamentoPrevia{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.7;background:rgba(100,140,190,.09);border:1px solid var(--line);border-radius:14px;padding:18px}.orcamento-acoes{display:flex;gap:12px;flex-wrap:wrap}.orcamento-acoes a{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:24px;text-decoration:none;cursor:pointer}.orcamento-acoes a[aria-disabled=true]{opacity:.45;cursor:default}html[data-tema=claro] #orcamentoWhatsApp{background:#f4f7ff}@media(max-width:500px){#orcamentoWhatsApp{padding:20px}.orcamento-acoes a{width:100%}.orcamento-cabecalho h2{font-size:20px}}
 </style><script>let orcamentoCompartilhadoBase = null;
 let orcamentoIdentificador='',orcamentoData='';
+function validarDataOrcamento(input){
+ const s=input.value,m=s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);let valida=!s&&!input.required;
+ if(m){const d=Number(m[1]),mes=Number(m[2]),ano=Number(m[3]),data=new Date(Date.UTC(ano,mes-1,d));valida=ano>=2000&&ano<=9999&&data.getUTCFullYear()===ano&&data.getUTCMonth()===mes-1&&data.getUTCDate()===d;}
+ input.setCustomValidity(valida?'':'Informe uma data válida no formato DD/MM/AAAA.');input.setAttribute('aria-invalid',String(!valida));return valida;
+}
+function mascararDataOrcamento(input){const n=input.value.replace(/\D/g,'').slice(0,8);input.value=n.slice(0,2)+(n.length>2?'/'+n.slice(2,4):'')+(n.length>4?'/'+n.slice(4):'');validarDataOrcamento(input);}
 function selecionarAbaOrcamento(aba){document.getElementById('orcamentoWhatsApp').dataset.aba=aba;document.querySelectorAll('.orcamento-abas button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.aba===aba)));}
 function abrirCompartilharOrcamento() {
  const r=ultimosResultados;
  if(!Number.isFinite(r.preco_venda_markup)||r.preco_venda_markup<=0||document.getElementById('resultadosSection').classList.contains('hidden')){mostrarMensagem('Calcule a peça','Faça um cálculo válido antes de compartilhar.','warning');return;}
  orcamentoCompartilhadoBase=JSON.stringify(r);
  const agora=new Date();orcamentoIdentificador='SP-'+agora.getTime().toString(36).toUpperCase();orcamentoData=agora.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'});
+ document.getElementById('orcamentoDataEmissao').value=orcamentoData;
  document.getElementById('orcamentoPeca').value=referenciaSelecionada?.descricao||'';
  document.getElementById('orcamentoQuantidade').value='1';
  document.getElementById('orcamentoObservacao').value='';
@@ -2575,6 +2582,9 @@ function abrirCompartilharOrcamento() {
  selecionarAbaOrcamento('dados');atualizarPreviaOrcamento();document.getElementById('orcamentoWhatsApp').showModal();
 }
 function mensagemOrcamento(){
+ for(const id of ['orcamentoDataEmissao','orcamentoPrazo','orcamentoValidade'])validarDataOrcamento(document.getElementById(id));
+ if(!document.getElementById('orcamentoCampos').checkValidity())return '';
+ orcamentoData=document.getElementById('orcamentoDataEmissao').value;
  const peca=document.getElementById('orcamentoPeca').value.trim();
  const quantidade=Number(document.getElementById('orcamentoQuantidade').value);
  const preco=ultimosResultados.preco_venda_markup;
@@ -2582,7 +2592,7 @@ function mensagemOrcamento(){
  const observacao=document.getElementById('orcamentoObservacao').value.trim();
  const campo=id=>document.getElementById(id).value.trim();
  const detalhes=[['Material',campo('orcamentoMaterial')],['Cor / acabamento',campo('orcamentoCor')]].filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`);
- const condicoes=[['Prazo',campo('orcamentoPrazo')],['Pagamento',campo('orcamentoPagamento')],['Validade',campo('orcamentoValidade')]].filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`);
+ const condicoes=[['Previsão de entrega',campo('orcamentoPrazo')],['Pagamento',campo('orcamentoPagamento')],['Válido até',campo('orcamentoValidade')]].filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`);
  return ['*STUDIO PRINT*','Impressão 3D • Peças personalizadas','',`*ORÇAMENTO ${orcamentoIdentificador}*`,`Data: ${orcamentoData}`,...(campo('orcamentoCliente')?[`Cliente: ${campo('orcamentoCliente')}`]:[]),'','*PEÇA ORÇADA*',...(referenciaSelecionada?.codigo?[`Referência: ${referenciaSelecionada.codigo}`]:[]),`Peça: ${peca}`,...detalhes,`Quantidade: ${quantidade} unidade(s)`,'','*VALORES*',`Valor unitário: ${formatarValor(preco)}`,`*TOTAL: ${formatarValor(arredondarMoeda(preco*quantidade))}*`,...(condicoes.length?['','*CONDIÇÕES*',...condicoes]:[]),...(observacao?['','*OBSERVAÇÕES*',observacao]:[]),'','Obrigado por escolher a Studio Print!','Para aprovar ou tirar dúvidas, responda esta mensagem.'].join('\n');
 }
 async function baixarImagemOrcamento(event){
@@ -2597,6 +2607,9 @@ async function baixarImagemOrcamento(event){
  canvas.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=orcamentoIdentificador+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);},'image/png');
 }
 function atualizarPreviaOrcamento(){
+ const quantidade=Number(document.getElementById('orcamentoQuantidade').value),preco=ultimosResultados.preco_venda_markup;
+ document.getElementById('orcamentoValorUnitario').value=Number.isFinite(preco)?formatarValor(preco):'';
+ document.getElementById('orcamentoValorTotal').value=Number.isInteger(quantidade)&&quantidade>0&&quantidade<=10000&&Number.isFinite(preco)?formatarValor(arredondarMoeda(preco*quantidade)):'';
  const texto=mensagemOrcamento();document.getElementById('orcamentoPrevia').textContent=texto||'Informe o nome da peça e a quantidade para preparar o orçamento.';
  const valido=!!texto&&orcamentoCompartilhadoBase===JSON.stringify(ultimosResultados);
  for(const [id,base]of [['abrirWhatsAppMaquina','whatsapp://send?text='],['abrirWhatsAppWeb','https://wa.me/?text=']]){const link=document.getElementById(id);link.setAttribute('aria-disabled',String(!valido));if(valido)link.href=base+encodeURIComponent(texto);else link.removeAttribute('href');}
@@ -2631,5 +2644,7 @@ function validarCompartilhamentoOrcamento(event){
 @media(max-width:700px) and (min-height:740px){.orcamento-condicoes{grid-template-columns:1fr 1fr}.orcamento-condicoes .orcamento-campo:last-child{grid-column:1/-1}}
 </style><style>
 @media(min-width:701px){.orcamento-dados .orcamento-campo:nth-child(2){order:-1}.orcamento-dados .orcamento-campo:first-child,.orcamento-dados .orcamento-campo:nth-child(3){order:0}#orcamentoCampos input{min-height:40px!important;padding:8px 12px!important}#orcamentoCampos textarea{min-height:54px!important;padding:8px 12px!important}.orcamento-dados,.orcamento-condicoes{gap:10px}#orcamentoCampos label{font-size:12px;margin-bottom:4px}}
+</style><style>
+.orcamento-dados .orcamento-campo{order:0!important;grid-column:auto!important}.orcamento-dados .orcamento-campo:has(#orcamentoPeca){grid-column:1/-1!important}#orcamentoCampos input[readonly]{font-weight:600;background:rgba(31,190,112,.1);color:var(--text)}#orcamentoCampos input[aria-invalid=true]{border-color:#ef6464!important}@media(max-width:700px){.orcamento-dados{grid-template-columns:1fr 1fr}.orcamento-dados .orcamento-campo:has(#orcamentoCliente){grid-column:1/-1!important}}
 </style></body>
 </html>
